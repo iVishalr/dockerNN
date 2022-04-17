@@ -1,8 +1,8 @@
 import os
 import numpy as np
 import pickle
-import dockerdnn.nn as nn
-import dockerdnn.optim as optim
+import dockernn.nn as nn
+import dockernn.optim as optim
 
 class CIFAR10:
     def __init__(self,root,train=True):
