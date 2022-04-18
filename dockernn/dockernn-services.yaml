@@ -1,0 +1,136 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: relu-service
+  labels:
+    app: relu
+
+spec:
+  selector:
+    app: relu
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 30001
+      targetPort: 30001
+      nodePort: 30001
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sigmoid-service
+spec:
+  selector:
+    app: sigmoid
+  ports:
+    - protocol: TCP
+      port: 30000
+      targetPort: 30000
+      nodePort: 30000
+  type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: softmax-service
+spec:
+  selector:
+    app: softmax
+  ports:
+    - protocol: TCP
+      port: 30003
+      targetPort: 30003
+      nodePort: 30003
+  type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tanh-service
+spec:
+  selector:
+    app: tanh
+  ports:
+    - protocol: TCP
+      port: 30002
+      targetPort: 30002
+      nodePort: 30002
+  type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: linear-service
+spec:
+  selector:
+    app: linear
+  ports:
+    - protocol: TCP
+      port: 20000
+      targetPort: 20000
+      nodePort: 20000
+  type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mse-service
+spec:
+  selector:
+    app: mse
+  ports:
+    - protocol: TCP
+      port: 40000
+      targetPort: 40000
+      nodePort: 40000
+  type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cross-entropy-loss-service
+spec:
+  selector:
+    app: cross-entropy-loss
+  ports:
+    - protocol: TCP
+      port: 40001
+      targetPort: 40001
+      nodePort: 40001
+  type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sgd-service
+spec:
+  selector:
+    app: sgd
+  ports:
+    - protocol: TCP
+      port: 10000
+      targetPort: 10000
+      nodePort: 10000
+  type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adagrad-service
+spec:
+  selector:
+    app: adagrad
+  ports:
+    - protocol: TCP
+      port: 10001
+      targetPort: 10001
+      nodePort: 10001
+  type: LoadBalancer

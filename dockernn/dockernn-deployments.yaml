@@ -1,0 +1,250 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: relu-deployment
+  labels:
+    app: relu
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: relu
+  template:
+    metadata:
+      labels:
+        app: relu
+    spec:
+      containers:
+        - name: relu
+          image: relu
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 30001
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sigmoid-deployment
+  labels:
+    app: sigmoid
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sigmoid
+  template:
+    metadata:
+      labels:
+        app: sigmoid
+    spec:
+      containers:
+        - name: sigmoid
+          image: sigmoid
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 30000
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tanh-deployment
+  labels:
+    app: tanh
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tanh
+  template:
+    metadata:
+      labels:
+        app: tanh
+    spec:
+      containers:
+        - name: tanh
+          image: tanh
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 30002
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: softmax-deployment
+  labels:
+    app: softmax
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: softmax
+  template:
+    metadata:
+      labels:
+        app: softmax
+    spec:
+      containers:
+        - name: softmax
+          image: softmax
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 30003
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linear-deployment
+  labels:
+    app: linear
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: linear
+  template:
+    metadata:
+      labels:
+        app: linear
+    spec:
+      containers:
+        - name: linear
+          image: linear
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 20000
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mse-deployment
+  labels:
+    app: mse
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mse
+  template:
+    metadata:
+      labels:
+        app: mse
+    spec:
+      containers:
+        - name: mse
+          image: mse
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 40000
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cross-entropy-loss-deployment
+  labels:
+    app: cross-entropy-loss
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cross-entropy-loss
+  template:
+    metadata:
+      labels:
+        app: cross-entropy-loss
+    spec:
+      containers:
+        - name: cross-entropy-loss
+          image: cross-entropy-loss
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 40001
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sgd-deployment
+  labels:
+    app: sgd
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sgd
+  template:
+    metadata:
+      labels:
+        app: sgd
+    spec:
+      containers:
+        - name: sgd
+          image: sgd
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 10000
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adagrad-deployment
+  labels:
+    app: adagrad
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: adagrad
+  template:
+    metadata:
+      labels:
+        app: adagrad
+    spec:
+      containers:
+        - name: adagrad
+          image: adagrad
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 10001
