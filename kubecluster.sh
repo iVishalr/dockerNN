@@ -10,25 +10,25 @@ echo "  sudo swapon -a"
 
 sudo swapoff -a
 
-# read -e -p "
-# Do you want to install docker-engine and docker-cli? [Y/n] " YN
+read -e -p "
+Do you want to install docker-engine and docker-cli? [Y/n] " YN
 
-# [[ $YN == "y" || $YN == "Y" || $YN == "" ]] && \
-# sudo apt install apt-transport-https ca-certificates curl software-properties-common && \
-# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
-# sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" && \
-# sudo apt-get install docker-ce docker-ce-cli containerd.io -y && \
-# cat <<EOF | sudo tee /etc/docker/daemon.json
-# {
-#   "exec-opts": ["native.cgroupdriver=systemd"],
-#   "log-driver": "json-file",
-#   "log-opts": {
-#     "max-size": "100m"
-#   },
-#   "storage-driver": "overlay2"
-# } 
-# EOF&&\
-# sudo systemctl enable docker && sudo systemctl daemon-reload && sudo systemctl restart docker
+[[ $YN == "y" || $YN == "Y" || $YN == "" ]] && \
+sudo apt install apt-transport-https ca-certificates curl software-properties-common && \
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" && \
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y && \
+cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+} 
+EOF&&\
+sudo systemctl enable docker && sudo systemctl daemon-reload && sudo systemctl restart docker
 
 echo "
 Please ensure you do not have minikube or any kubernetes emulator installed. Kubernetes Cluster setup may not be successful if present." 

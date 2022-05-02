@@ -1,6 +1,5 @@
 from typing import Dict
 import numpy as np
-import jsonpickle
 import json
 from flask import Flask, request, jsonify
 app = Flask(__name__)

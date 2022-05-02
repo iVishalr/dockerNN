@@ -1,6 +1,4 @@
-from ast import Mod
 import numpy as np
-import json
 import blosc
 import requests
 from .Softmax import Softmax
@@ -22,9 +20,6 @@ class CrossEntropyLoss:
         r = requests.post(f"http://{self.ip}:30003/forward", data=params)
         data = r.json()
         self.log_logits = data["out"]
-
-        # print(blosc.unpack_array(bytes.fromhex(self.log_logits)))
-        # print(targets)
 
         params = {"logits": self.log_logits, "targets": self.targets.hex()}
         r = requests.post(f"http://{self.ip}:30006/forward", data=params)

@@ -1,6 +1,4 @@
-from crypt import methods
 import numpy as np
-import json
 import blosc
 from flask import Flask, request, jsonify
 

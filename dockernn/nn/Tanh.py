@@ -1,7 +1,6 @@
 import numpy as np
 import blosc
 import requests
-import json
 
 from .Module import Module
 

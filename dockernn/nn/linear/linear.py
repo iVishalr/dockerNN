@@ -1,7 +1,6 @@
 import numpy as np
 from flask import Flask, request, jsonify
 import blosc
-import json
 
 app = Flask(__name__)
 
@@ -14,7 +13,6 @@ def forward():
     # weights are of shape (out_features, in_features)
     # inputs are of shape (B, -1, in_features)
     # bias is of shape (1,)
-    # print(weights)
 
     weights = blosc.unpack_array(bytes.fromhex(weights))
     if bias != "None":
@@ -61,13 +59,8 @@ def backward():
     db += np.sum(grad) if use_bias == "True" else np.zeros(1)
     
     if stop_grad == "False":
-        # grad = (8,100)
-        # weights = (100,50)
-        # x = (8,50)
-        print("false")
         dx = grad @ weights
     else:
-        # print("Assigning zero grad")
         dx = np.zeros_like(input_matrix)
 
     dW = blosc.pack_array(dW)
