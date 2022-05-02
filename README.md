@@ -1,5 +1,14 @@
 # DockerNN
 
+&nbsp;
+
+<p float="left" align="center" padding="100px">
+  <img src="./doc/docker.png" height="200px"/>
+  <img src="./doc/kub.png" height="200px"/>
+</p>
+
+&nbsp;
+
 DockerNN is a very small neural network library built with docker containers. The library models neural network models as sequence of client-server layers instead of the conventional methods. Docker containers are orchestrated using Kubernetes which comes with nice suite of features like load balancing, auto healing and makes distributed computing easier.
 
 ## Overview
@@ -51,7 +60,7 @@ Starting Kubernetes Cluster
 $ bash kubecluster.sh
 ```
 
-`kubecluster.sh` script will guide to help you setup your local kubernetes cluster. Make sure you do not have any other kubernetes cluster emulator like Minikube or Kind installed. This will interfere with different environment variables that kubernetes cluster uses to start the cluster. The script also asks for the IP Address of your local machine. Please use `ip addr show` or `ifconfig` to note down your IP Address. 
+`kubecluster.sh` script will guide to help you setup your local kubernetes cluster. Make sure you do not have any other kubernetes cluster emulator like Minikube or Kind installed. This will interfere with different environment variables that kubernetes cluster uses to start the cluster. The script also asks for the IP Address of your local machine. Please use `ip addr show` or `ifconfig` to note down your IP Address.
 
 Stopping Kubernetes Cluster
 
@@ -59,9 +68,9 @@ Stopping Kubernetes Cluster
 $ bash kubecluster_teardown.sh
 ```
 
-This script will reset your kubernetes cluster and reset the IP tables. The conf file present in `$HOME/.kube/` will also be removed. 
+This script will reset your kubernetes cluster and reset the IP tables. The conf file present in `$HOME/.kube/` will also be removed.
 
-You can find a detailed procedure to setup kubernetes cluster below. 
+You can find a detailed procedure to setup kubernetes cluster below.
 
 ## Deploying DockerNN
 
@@ -76,7 +85,7 @@ The `.yaml` files can be configured based on user's needs. The amount of resourc
 
 ## Example program using DockerNN
 
-A simple neural network model can be built as follows. In this example we will build a model that learns the XOR function. 
+A simple neural network model can be built as follows. In this example we will build a model that learns the XOR function.
 
 Importing necessary modules
 
@@ -119,10 +128,9 @@ class Model(nn.Module):
         return x
 ```
 
-Notice how the model code is exactly how one would build models in PyTorch. 
+Notice how the model code is exactly how one would build models in PyTorch.
 
 Now since we are dealing with client server architecture, we need to specify the IP address of our Kubernetes Cluster. The IP address must be the same IP address that was used during kubernetes cluster setup. In this example, `192.168.0.161` is the IP of my kubernetes cluster.
-
 
 ```python
 IP = "192.168.0.161"
@@ -136,7 +144,7 @@ model.register_parameters()
 model.set_ip(IP)
 ```
 
-The above code instantiates our model. `register_parameters()` will ask DockerNN to make note of all the parameters in our model. Internally, DockerNN will create a HashMap containing pointers to the parameters in all the submodules used in the model. `set_ip(IP)` will ask DockerNN to use the given IP address for making requests to kubernetes cluster. 
+The above code instantiates our model. `register_parameters()` will ask DockerNN to make note of all the parameters in our model. Internally, DockerNN will create a HashMap containing pointers to the parameters in all the submodules used in the model. `set_ip(IP)` will ask DockerNN to use the given IP address for making requests to kubernetes cluster.
 
 Now we will create a loss function for training our model.
 
@@ -144,7 +152,7 @@ Now we will create a loss function for training our model.
 loss_fn = nn.MSELoss(IP)
 ```
 
-Every loss function takes in IP address as a parameter while instantiating the loss classes. 
+Every loss function takes in IP address as a parameter while instantiating the loss classes.
 
 Next, we will instantiate a SGD optimizer from the optim package of DockerNN.
 
@@ -152,7 +160,7 @@ Next, we will instantiate a SGD optimizer from the optim package of DockerNN.
 optimizer = optim.SGD(model.parameters(), lr=2e-2)
 ```
 
-All optimizers will take the parameter HashMap as first input parameter followed by learning rate `lr`. 
+All optimizers will take the parameter HashMap as first input parameter followed by learning rate `lr`.
 
 Finally, we will write our training loop for training the model.
 
@@ -193,11 +201,11 @@ $ python3 ./main.py
 
 If everything is setup properly, you should see the model start training.
 
-Another example of using DockerNN is available in `cifar10.py`. Here I have trained a simple model on [CIFAR 10](https://www.cs.toronto.edu/~kriz/cifar.html) dataset. 
+Another example of using DockerNN is available in `cifar10.py`. Here I have trained a simple model on [CIFAR 10](https://www.cs.toronto.edu/~kriz/cifar.html) dataset.
 
 ## Manually Setup Kubernetes Cluster
 
-This section provides more details on how to setup a Kubernetes Cluster on our local systems. 
+This section provides more details on how to setup a Kubernetes Cluster on our local systems.
 
 1. Disable Swapping on all nodes. (This helps kubernetes to work well however some people say it works just fine without disabling swapping.)
 
@@ -222,7 +230,7 @@ $ cat <<EOF | sudo tee /etc/docker/daemon.json
     "max-size": "100m"
   },
   "storage-driver": "overlay2"
-} 
+}
 EOF
 $ sudo systemctl enable docker
 $ sudo systemctl daemon-reload
@@ -274,7 +282,7 @@ $ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 6. Want to schedule pods on master node?
 
-Type the following command to allow pod scheduling on master node. 
+Type the following command to allow pod scheduling on master node.
 
 ```bash
 $ kubectl taint nodes --all node-role.kubernetes.io/master-
@@ -331,7 +339,7 @@ spec:
   selector:
     matchLabels:
       app: nginx
-  replicas: 2 
+  replicas: 2
   template:
     metadata:
       labels:
@@ -341,7 +349,7 @@ spec:
       - name: nginx
         image: nginx:latest
         ports:
-        - containerPort: 80      
+        - containerPort: 80
 EOF
 ```
 
@@ -354,9 +362,9 @@ kind: Service
 metadata:
   name: nginx-service
 spec:
-  selector: 
+  selector:
     app: nginx
-  type: NodePort  
+  type: NodePort
   ports:
     - port: 80
       targetPort: 80
