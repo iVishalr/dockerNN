@@ -14,6 +14,12 @@ DockerNN is a very small neural network library built with docker containers. Th
 ## Overview
 
 DockerNN is a neural network library that is very similar to PyTorch. DockerNN provides modules to build and train small models like MLP with automatic forward and backward engines. DockerNN contains two parts, a client and a server. The client part of DockerNN will be used by the client to build and train neural networks. The server part of DockerNN will be running on a Kubernetes Cluster. Training on the client side will typically involve looping through the layers used by the clients. Each layer in the client model will make a request to the cluster for a particular service. The server will then process the request and returns the results back to the client. Kubernetes Cluster can be as simple as a single desktop machine or a more sophisticated machine with mutliple nodes. Kubernetes provides different features like load balancing and much more which makes scalability easier.
+&nbsp;
+
+<p float="left" align="center" padding="100px">
+  <img src="./doc/cluster.svg"/>
+</p>
+&nbsp;
 
 ## Requirements
 
