@@ -14,5 +14,5 @@ COPY ./mse.py /mse.py
 RUN apk add util-linux
 ENV PATH="/opt/venv/bin:$PATH"
 
-EXPOSE 40000
+EXPOSE 30005
 CMD ["taskset","-c","0-3","python", "-u", "/mse.py"]

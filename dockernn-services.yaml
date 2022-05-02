@@ -70,9 +70,9 @@ spec:
     app: linear
   ports:
     - protocol: TCP
-      port: 20000
-      targetPort: 20000
-      nodePort: 20000
+      port: 30004
+      targetPort: 30004
+      nodePort: 30004
   type: LoadBalancer
 
 ---
@@ -85,9 +85,9 @@ spec:
     app: mse
   ports:
     - protocol: TCP
-      port: 40000
-      targetPort: 40000
-      nodePort: 40000
+      port: 30005
+      targetPort: 30005
+      nodePort: 30005
   type: LoadBalancer
 
 ---
@@ -100,9 +100,9 @@ spec:
     app: cross-entropy-loss
   ports:
     - protocol: TCP
-      port: 40001
-      targetPort: 40001
-      nodePort: 40001
+      port: 30006
+      targetPort: 30006
+      nodePort: 30006
   type: LoadBalancer
 
 ---
@@ -115,9 +115,9 @@ spec:
     app: sgd
   ports:
     - protocol: TCP
-      port: 10000
-      targetPort: 10000
-      nodePort: 10000
+      port: 30007
+      targetPort: 30007
+      nodePort: 30007
   type: LoadBalancer
 
 ---
@@ -130,7 +130,7 @@ spec:
     app: adagrad
   ports:
     - protocol: TCP
-      port: 10001
-      targetPort: 10001
-      nodePort: 10001
+      port: 30008
+      targetPort: 30008
+      nodePort: 30008
   type: LoadBalancer

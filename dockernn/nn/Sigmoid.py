@@ -13,7 +13,7 @@ class Sigmoid(Module):
         params = {"input_matrix": self.input_matrix.hex(), 
                   "act_fn": "sigmoid"
                   }
-        r = requests.post("http://localhost:30000/forward", data=params)
+        r = requests.post(f"http://{self.ip}:30000/forward", data=params)
         data = r.json()
         self.output = blosc.unpack_array(bytes.fromhex(data["out"]))
         return self.output
@@ -25,7 +25,7 @@ class Sigmoid(Module):
                   "act_fn": "sigmoid", 
                   "grad": grad.hex(), 
                 }
-        r = requests.post("http://localhost:30000/backward", data=params)
+        r = requests.post(f"http://{self.ip}:30000/backward", data=params)
         data = r.json()
         out = blosc.unpack_array(bytes.fromhex(data["out"]))
         return out

@@ -6,8 +6,6 @@ import dockernn.optim as optim
 X = np.array([[0,0, 0],[0,0,1],[0,1,0],[0,1,1], [1,0,0],[1,0,1],[1,1,0],[1,1,1]]).reshape(-1,3)
 y = np.array([0, 1, 1, 0, 1, 0, 0, 1])
 
-print(y)
-
 class Model(nn.Module):
     def __init__(self, in_features=3, out_features=1) -> None:
         super().__init__()
@@ -29,12 +27,16 @@ class Model(nn.Module):
 
         return x
 
-loss_fn = nn.MSELoss()
+IP = "192.168.0.161"
+
+loss_fn = nn.MSELoss(IP)
 model = Model()
 
 model.register_parameters()
+model.set_ip(IP)
+
 pprint(model._parameters, indent=4)
-optimizer = optim.SGD(model.parameters(), lr=9.5e-3)
+optimizer = optim.SGD(model.parameters(), lr=2e-2)
 pprint(model._parameters, indent=4)
 indices = np.arange(len(y))
 iterations = 20000

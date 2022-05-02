@@ -104,12 +104,16 @@ class Module:
     def state_dict(self):
         pass
 
+    def set_ip(self, ip):
+        modules = list(self._modules.keys())
+        self.ip = ip
+        for name in modules:
+            self._modules[name].set_ip(ip)
+
     def backward(self, grad: np.ndarray = None):
         modules = list(self._modules.keys())[::-1]
         for name in modules[:-1]:
             grad = self._modules[name].backward(grad)
-            # print("Class :", type(self._modules[name]))
-            # print(grad)
         grad = self._modules[modules[-1]].backward(grad, stop_grad = True)
         return grad
 

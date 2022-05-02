@@ -25,7 +25,7 @@ class SGD:
             gradients[name] = param.gradient.tolist()
 
         params = {"parameters": json.dumps(parameters), "gradients": json.dumps(gradients),"lr": self.lr}
-        r = requests.post("http://localhost:10000/step", data=params)
+        r = requests.post("http://localhost:30007/step", data=params)
         data = r.json()
         parameters = json.loads(data["parameters"])
         

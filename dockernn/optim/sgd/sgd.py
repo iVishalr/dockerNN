@@ -3,7 +3,6 @@ import numpy as np
 import jsonpickle
 import json
 from flask import Flask, request, jsonify
-
 app = Flask(__name__)
 
 @app.route("/step", methods=["POST"])
@@ -39,4 +38,4 @@ def step():
     return jsonify(res)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    app.run(host="0.0.0.0", port=30007)

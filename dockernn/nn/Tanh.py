@@ -14,7 +14,7 @@ class Tanh(Module):
         params = {"input_matrix": self.input_matrix.hex(), 
                   "act_fn": "tanh"
                   }
-        r = requests.post("http://localhost:30002/forward", data=params)
+        r = requests.post(f"http://{self.ip}:30002/forward", data=params)
         data = r.json()
         out = blosc.unpack_array(bytes.fromhex(data["out"]))
         return out
@@ -25,7 +25,7 @@ class Tanh(Module):
                   "grad": grad.hex(), 
                   "act_fn": "tanh", 
                   }
-        r = requests.post("http://localhost:30002/backward", data=params)
+        r = requests.post(f"http://{self.ip}:30002/backward", data=params)
         data = r.json()
         out = blosc.unpack_array(bytes.fromhex(data["out"]))
         return out

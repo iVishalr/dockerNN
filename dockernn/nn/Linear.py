@@ -21,13 +21,12 @@ class Linear(Module):
         params = {"input_matrix": self.input_matrix.hex(), 
                   "weights": self.w.hex(), "bias": self.b.hex(), 
                   }
-        r = requests.post("http://localhost:20000/forward", data=params)
+        r = requests.post(f"http://{self.ip}:30004/forward", data=params)
         data = r.json()
         out = blosc.unpack_array(bytes.fromhex(data["out"]))
         return out
 
     def backward(self, grad: np.ndarray, stop_grad = False) -> np.ndarray:
-        # print(f"Linear grad in : \n{grad}\n")
         self.dW = self.weights.gradient
         self.db = self.bias.gradient
         self.dW = blosc.pack_array(self.dW)
@@ -42,7 +41,7 @@ class Linear(Module):
                   "stop_grad": stop_grad, 
                   "use_bias": self.use_bias,
                   }
-        r = requests.post("http://localhost:20000/backward", data=params)
+        r = requests.post(f"http://{self.ip}:30004/backward", data=params)
         data = r.json()
         dW = data["dW"]
         db = data["db"]

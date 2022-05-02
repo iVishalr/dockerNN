@@ -29,28 +29,28 @@ services:
     build: nn/linear
     image: linear:1.0
     ports:
-      - 20000:20000
+      - 30004:30004
 
   mse:
     build: nn/mse
     image: mse:1.0
     ports:
-      - 40000:40000
+      - 30005:30005
 
   cross_entropy_loss:
     build: nn/cross_entropy_loss
     image: cross_entropy_loss:1.0
     ports:
-      - 40001:40001
+      - 30006:30006
 
   adagrad:
     build: optim/adagrad
     image: adagrad:1.0
     ports:
-      - 10001:10001
+      - 30008:30008
 
   sgd:
     build: optim/sgd
     image: sgd:1.0
     ports:
-      - 10000:10000
+      - 30007:30007

@@ -28,7 +28,7 @@ class Adagrad:
             cache[name] = self.cache[name].tolist()
 
         params = {"parameters": json.dumps(parameters), "gradients": json.dumps(gradients), "cache": json.dumps(cache) ,"lr": self.lr, "epsilon": self.epsilon}
-        r = requests.post("http://localhost:10001/step", data=params)
+        r = requests.post("http://localhost:30008/step", data=params)
         data = r.json()
         
         parameters = json.loads(data["parameters"])

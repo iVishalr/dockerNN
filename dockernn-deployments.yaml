@@ -5,7 +5,7 @@ metadata:
   labels:
     app: relu
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: relu
@@ -16,11 +16,11 @@ spec:
     spec:
       containers:
         - name: relu
-          image: relu
+          image: relu:1.0
           imagePullPolicy: Never
           resources:
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
           ports:
             - containerPort: 30001
@@ -33,7 +33,7 @@ metadata:
   labels:
     app: sigmoid
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: sigmoid
@@ -44,11 +44,11 @@ spec:
     spec:
       containers:
         - name: sigmoid
-          image: sigmoid
+          image: sigmoid:1.0
           imagePullPolicy: Never
           resources:
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
           ports:
             - containerPort: 30000
@@ -61,7 +61,7 @@ metadata:
   labels:
     app: tanh
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: tanh
@@ -72,11 +72,11 @@ spec:
     spec:
       containers:
         - name: tanh
-          image: tanh
+          image: tanh:1.0
           imagePullPolicy: Never
           resources:
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
           ports:
             - containerPort: 30002
@@ -89,7 +89,7 @@ metadata:
   labels:
     app: softmax
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: softmax
@@ -100,11 +100,11 @@ spec:
     spec:
       containers:
         - name: softmax
-          image: softmax
+          image: softmax:1.0
           imagePullPolicy: Never
           resources:
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
           ports:
             - containerPort: 30003
@@ -117,7 +117,7 @@ metadata:
   labels:
     app: linear
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: linear
@@ -128,14 +128,14 @@ spec:
     spec:
       containers:
         - name: linear
-          image: linear
+          image: linear:1.0
           imagePullPolicy: Never
           resources:
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
           ports:
-            - containerPort: 20000
+            - containerPort: 30004
 
 ---
 apiVersion: apps/v1
@@ -145,7 +145,7 @@ metadata:
   labels:
     app: mse
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: mse
@@ -156,14 +156,14 @@ spec:
     spec:
       containers:
         - name: mse
-          image: mse
+          image: mse:1.0
           imagePullPolicy: Never
           resources:
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
           ports:
-            - containerPort: 40000
+            - containerPort: 30005
 
 ---
 apiVersion: apps/v1
@@ -173,7 +173,7 @@ metadata:
   labels:
     app: cross-entropy-loss
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: cross-entropy-loss
@@ -184,14 +184,14 @@ spec:
     spec:
       containers:
         - name: cross-entropy-loss
-          image: cross-entropy-loss
+          image: cross_entropy_loss:1.0
           imagePullPolicy: Never
           resources:
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
           ports:
-            - containerPort: 40001
+            - containerPort: 30006
 
 ---
 apiVersion: apps/v1
@@ -201,7 +201,7 @@ metadata:
   labels:
     app: sgd
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: sgd
@@ -212,14 +212,14 @@ spec:
     spec:
       containers:
         - name: sgd
-          image: sgd
+          image: sgd:1.0
           imagePullPolicy: Never
           resources:
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
           ports:
-            - containerPort: 10000
+            - containerPort: 30007
 
 ---
 apiVersion: apps/v1
@@ -229,7 +229,7 @@ metadata:
   labels:
     app: adagrad
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: adagrad
@@ -240,11 +240,11 @@ spec:
     spec:
       containers:
         - name: adagrad
-          image: adagrad
+          image: adagrad:1.0
           imagePullPolicy: Never
           resources:
             limits:
-              memory: "128Mi"
+              memory: "512Mi"
               cpu: "500m"
           ports:
-            - containerPort: 10001
+            - containerPort: 30008

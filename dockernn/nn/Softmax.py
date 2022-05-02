@@ -16,7 +16,7 @@ class Softmax(Module):
                   "act_fn": "softmax", 
                   "axis":axis
                   }
-        r = requests.post("http://localhost:30003/forward", data=params)
+        r = requests.post(f"http://{self.ip}:30003/forward", data=params)
         data = r.json()
         out = blosc.unpack_array(bytes.fromhex(data["out"]))
         self.output = out
@@ -30,7 +30,7 @@ class Softmax(Module):
                   "axis": self.axis, 
                   "grad": grad.hex(), 
                   }
-        r = requests.post("http://localhost:30003/backward", data=params)
+        r = requests.post(f"http://{self.ip}:30003/backward", data=params)
         data = r.json()
         out = blosc.unpack_array(bytes.fromhex(data["out"]))
         return out

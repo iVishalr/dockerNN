@@ -14,5 +14,5 @@ COPY ./linear.py /linear.py
 RUN apk add util-linux
 ENV PATH="/opt/venv/bin:$PATH"
 
-EXPOSE 20000
+EXPOSE 30004
 CMD ["taskset","-c","0-3","python", "-u", "/linear.py"]

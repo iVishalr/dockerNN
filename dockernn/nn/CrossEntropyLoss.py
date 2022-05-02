@@ -1,3 +1,4 @@
+from ast import Mod
 import numpy as np
 import json
 import blosc
@@ -5,9 +6,10 @@ import requests
 from .Softmax import Softmax
 
 class CrossEntropyLoss:
-    def __init__(self) -> None:
+    def __init__(self, ip) -> None:
         self.logits = None
         self.targets = None
+        self.ip = ip
 
     def forward(self, logits: np.ndarray, targets: np.ndarray) -> np.ndarray:
         self.logits = blosc.pack_array(logits)
@@ -16,18 +18,16 @@ class CrossEntropyLoss:
                   "act_fn": "softmax", 
                   "axis": -1
                   }
-        
-        
 
-        r = requests.post("http://localhost:30003/forward", data=params)
+        r = requests.post(f"http://{self.ip}:30003/forward", data=params)
         data = r.json()
         self.log_logits = data["out"]
 
-        print(blosc.unpack_array(bytes.fromhex(self.log_logits)))
-        print(targets)
+        # print(blosc.unpack_array(bytes.fromhex(self.log_logits)))
+        # print(targets)
 
         params = {"logits": self.log_logits, "targets": self.targets.hex()}
-        r = requests.post("http://localhost:40001/forward", data=params)
+        r = requests.post(f"http://{self.ip}:30006/forward", data=params)
         data = r.json()
         out = blosc.unpack_array(bytes.fromhex(data["loss"]))
         return out
@@ -42,7 +42,7 @@ class CrossEntropyLoss:
                   "targets": self.targets.hex(),
                   "grad": grad_in.hex(),
                  }
-        r = requests.post("http://localhost:40001/backward", data=params)
+        r = requests.post(f"http://{self.ip}:30006/backward", data=params)
         data = r.json()
         out = blosc.unpack_array(bytes.fromhex(data["out"]))
         return out

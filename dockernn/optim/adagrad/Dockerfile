@@ -14,5 +14,5 @@ COPY ./adagrad.py /adagrad.py
 RUN apk add util-linux
 ENV PATH="/opt/venv/bin:$PATH"
 
-EXPOSE 10001
+EXPOSE 30008
 CMD ["taskset","-c","0-3","python", "-u", "/adagrad.py"]

@@ -14,5 +14,5 @@ COPY ./sgd.py /sgd.py
 RUN apk add util-linux
 ENV PATH="/opt/venv/bin:$PATH"
 
-EXPOSE 10000
+EXPOSE 30007
 CMD ["taskset","-c","0-3","python", "-u", "/sgd.py"]

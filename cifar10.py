@@ -61,10 +61,15 @@ class Model(nn.Module):
         logits = self.ln4(x)
         return logits
 
+IP = "localhost"
+
+loss_fn = nn.CrossEntropyLoss(IP)
+
 model = Model()
 model.register_parameters()
+model.set_ip(IP)
+
 optimizer = optim.SGD(model.parameters(), lr=3e-3)
-loss_fn = nn.CrossEntropyLoss()
 BATCH_SIZE = 128
 for it in range(10):
     losses = []
@@ -77,6 +82,7 @@ for it in range(10):
 
         optimizer.zero_grad()
         logits = model(X)
+
         loss = loss_fn(logits, y)
         grad = loss_fn.backward()
         model.backward(grad)

@@ -2,11 +2,13 @@ import numpy as np
 import json
 import blosc
 import requests
+from .Module import Module
 
 class MSELoss:
-    def __init__(self) -> None:
+    def __init__(self, ip) -> None:
         self.logits = None
         self.targets = None
+        self.ip = ip
 
     def forward(self, logits: np.ndarray, targets: np.ndarray) -> np.ndarray:
         self.logits = blosc.pack_array(logits)
@@ -14,7 +16,7 @@ class MSELoss:
         # print(targets)
         params = {"logits": self.logits.hex(), 
                   "targets": self.targets.hex()}
-        r = requests.post("http://localhost:40000/forward", data=params)
+        r = requests.post(f"http://localhost:30005/forward", data=params)
         data = r.json()
         out = blosc.unpack_array(bytes.fromhex(data["loss"]))
         out = out.reshape(-1)
@@ -30,7 +32,7 @@ class MSELoss:
                   "targets": self.targets.hex(), 
                   "grad": grad.hex(),
                   }
-        r = requests.post("http://localhost:40000/backward", data=params)
+        r = requests.post(f"http://localhost:30005/backward", data=params)
         data = r.json()
         out = blosc.unpack_array(bytes.fromhex(data["out"]))
         return out

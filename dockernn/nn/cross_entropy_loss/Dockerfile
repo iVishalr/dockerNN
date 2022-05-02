@@ -14,5 +14,5 @@ COPY ./cross_entropy_loss.py /cross_entropy_loss.py
 RUN apk add util-linux
 ENV PATH="/opt/venv/bin:$PATH"
 
-EXPOSE 40001
+EXPOSE 30006
 CMD ["taskset","-c","0-3","python", "-u", "/cross_entropy_loss.py"]

@@ -14,7 +14,7 @@ class ReLU(Module):
         params = {"input_matrix": self.input_matrix.hex(), 
                   "act_fn": "relu"
                   }
-        r = requests.post("http://localhost:30001/forward", data=params)
+        r = requests.post(f"http://{self.ip}:30001/forward", data=params)
         data = r.json()
         out = blosc.unpack_array(bytes.fromhex(data["out"]))
         return out
@@ -25,7 +25,7 @@ class ReLU(Module):
                   "grad": grad.hex(), 
                   "act_fn": "relu",
                   }
-        r = requests.post("http://localhost:30001/backward", data=params)
+        r = requests.post(f"http://{self.ip}:30001/backward", data=params)
         data = r.json()
         out = blosc.unpack_array(bytes.fromhex(data["out"]))
         return out
