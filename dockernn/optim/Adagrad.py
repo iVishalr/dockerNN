@@ -7,11 +7,12 @@ import requests
 from ..nn import Parameter
 
 class Adagrad:
-    def __init__(self, parameters: Dict[str, Parameter], lr: float = 3e-4, epsilon: float = 1e-8) -> None:
+    def __init__(self, parameters: Dict[str, Parameter], lr: float = 3e-4, epsilon: float = 1e-8, ip:str = "localhost") -> None:
         self.parameters = parameters
         self.lr = lr
         self.epsilon = epsilon
         self.cache = {key:np.zeros_like(param.tensor) for key,param in self.parameters.items()}
+        self.ip = ip
 
     def zero_grad(self, set_to_none: bool = False) -> None:
         for i in self.parameters:
@@ -28,7 +29,7 @@ class Adagrad:
             cache[name] = self.cache[name].tolist()
 
         params = {"parameters": json.dumps(parameters), "gradients": json.dumps(gradients), "cache": json.dumps(cache) ,"lr": self.lr, "epsilon": self.epsilon}
-        r = requests.post("http://localhost:30008/step", data=params)
+        r = requests.post(f"http://{self.ip}:30008/step", data=params)
         data = r.json()
         
         parameters = json.loads(data["parameters"])

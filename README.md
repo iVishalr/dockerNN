@@ -151,7 +151,7 @@ model.register_parameters()
 model.set_ip(IP)
 ```
 
-The above code instantiates our model. `register_parameters()` will ask DockerNN to make note of all the parameters in our model. Internally, DockerNN will create a HashMap containing pointers to the parameters in all the submodules used in the model. `set_ip(IP)` will ask DockerNN to use the given IP address for making requests to kubernetes cluster.
+The above code instantiates our model. `register_parameters()` will ask DockerNN to make note of all the parameters in our model. Internally, DockerNN will create a HashMap containing pointers to the parameters in all the submodules used in the model. `set_ip(IP)` will ask DockerNN to use the given IP address for making requests to kubernetes cluster. IP will be localhost if IP is not passed explicitly.
 
 Now we will create a loss function for training our model.
 
@@ -159,15 +159,15 @@ Now we will create a loss function for training our model.
 loss_fn = nn.MSELoss(IP)
 ```
 
-Every loss function takes in IP address as a parameter while instantiating the loss classes.
+Every loss function takes in IP address as a parameter while instantiating the loss classes. If IP is not passed then IP is assumed to be localhost.
 
 Next, we will instantiate a SGD optimizer from the optim package of DockerNN.
 
 ```python
-optimizer = optim.SGD(model.parameters(), lr=2e-2)
+optimizer = optim.SGD(model.parameters(), lr=2e-2, ip=IP)
 ```
 
-All optimizers will take the parameter HashMap as first input parameter followed by learning rate `lr`.
+All optimizers will take the parameter HashMap as first input parameter followed by learning rate `lr`. Again, IP must be passed to the optimizer class. If IP is not passed, then it will be assumed to be localhost.
 
 Finally, we will write our training loop for training the model.
 

@@ -98,7 +98,7 @@ class Module:
     def state_dict(self):
         pass
 
-    def set_ip(self, ip):
+    def set_ip(self, ip: str = "localhost"):
         modules = list(self._modules.keys())
         self.ip = ip
         for name in modules:

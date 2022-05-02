@@ -7,9 +7,10 @@ import requests
 from ..nn import Parameter
 
 class SGD:
-    def __init__(self, parameters: Dict[str, Parameter], lr: float = 3e-4) -> None:
+    def __init__(self, parameters: Dict[str, Parameter], lr: float = 3e-4, ip:str = "localhost") -> None:
         self.parameters = parameters
         self.lr = lr
+        self.ip = ip
     
     def zero_grad(self, set_to_none: bool = False):
         for i in self.parameters:
@@ -24,7 +25,7 @@ class SGD:
             gradients[name] = param.gradient.tolist()
 
         params = {"parameters": json.dumps(parameters), "gradients": json.dumps(gradients),"lr": self.lr}
-        r = requests.post("http://localhost:30007/step", data=params)
+        r = requests.post(f"http://{self.ip}:30007/step", data=params)
         data = r.json()
         parameters = json.loads(data["parameters"])
         

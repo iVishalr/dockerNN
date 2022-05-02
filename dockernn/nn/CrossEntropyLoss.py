@@ -4,7 +4,7 @@ import requests
 from .Softmax import Softmax
 
 class CrossEntropyLoss:
-    def __init__(self, ip) -> None:
+    def __init__(self, ip: str = "localhost") -> None:
         self.logits = None
         self.targets = None
         self.ip = ip
